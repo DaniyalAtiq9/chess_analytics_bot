@@ -25,17 +25,16 @@ Full tables: [`data/country_outcome_tables.xlsx`](data/country_outcome_tables.xl
 Raw significance test output: [`data/significance_report.csv`](data/significance_report.csv)
 <!-- STATS:END -->
 
-## Setup (do this before the first scheduled run)
+## Setup
 
-1. Push this repo to GitHub.
-2. In **Settings → Secrets and variables → Actions → Variables**, add:
+1. In **Settings → Secrets and variables → Actions → Variables**, add:
    - `CHESS_USERNAME` = your chess.com username
    - `CHESS_CONTACT_EMAIL` = a real email (chess.com's API wants an
      identifying User-Agent; an anonymous/browser-spoofed one risks
      silent rate-limiting)
-3. Confirm **Settings → Actions → General → Workflow permissions** is set to
+2. Confirm **Settings → Actions → General → Workflow permissions** is set to
    "Read and write permissions" — the workflow needs to commit files back.
-4. Trigger it once manually (Actions tab → "Refresh chess.com stats" →
+3. Trigger it once manually (Actions tab → "Refresh chess.com stats" →
    "Run workflow") to do the initial full pull. This first run fetches your
    entire history and resolves every opponent, so expect it to take longer
    than subsequent runs — with 2,000+ opponents, budget several minutes.
