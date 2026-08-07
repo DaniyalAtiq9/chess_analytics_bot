@@ -50,7 +50,7 @@ Session fatigue data: [`data/session_fatigue_report.csv`](data/session_fatigue_r
 
 Daily at 06:17 UTC (see `.github/workflows/refresh_stats.yml`).
 
-## Design notes / known limitations (read before changing anything)
+## Design notes / known limitations 
 
 - **Incremental, not a full rebuild.** After the first run, only the
   current + previous month's games are re-fetched, and only opponents not
