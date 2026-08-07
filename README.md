@@ -7,22 +7,29 @@ GitHub Actions.
 The API: https://api.chess.com/pub/player/{username}/games/archives gives you a list of monthly archive URLs, each returning full PGNs with clock times if you played with a clock.
 
 <!-- STATS:START -->
-### Last updated: 2026-08-07 07:40 UTC
+### Last updated: 2026-08-07 14:50 UTC
 
-**Dataset:** 2140 rated games, 2023-02-16 to 2026-08-07
+**Dataset:** 2144 rated games, 2023-02-16 to 2026-08-07
 
 **Statistically flagged countries this run** (Bonferroni-corrected within this run's test set —
 does *not* correct across repeated daily runs; see notes in `chess_analytics/stats.py`):
 
 _No country crosses the Bonferroni-corrected significance threshold this run — consistent with the earlier manual finding that country has no strong effect on your results once tested properly._
 
+**Session fatigue** (does performance decline the longer you play in one sitting? —
+sessions inferred from time gaps, see `chess_analytics/sessions.py`):
+
+Based on 1331 inferred sessions, 2144 games. Position-vs-performance correlation: ρ=-0.0337, p=0.1218 — not distinguishable from no trend. First game of session vs. later games: later games score worse by 0.039 on average, p=0.0575 — not distinguishable from noise. _Both tests use α=0.05 uncorrected for this specific comparison — treat a single borderline p-value as a lead to watch over time, not a confirmed effect, same caveat as the country analysis._
+
 **Charts:**
 
 ![Blitz outcomes by country](charts/outcome_clustered_blitz.png)
 ![Rapid outcomes by country](charts/outcome_clustered_rapid.png)
+![Session fatigue](charts/session_fatigue.png)
 
 Full tables: [`data/country_outcome_tables.xlsx`](data/country_outcome_tables.xlsx) ·
-Raw significance test output: [`data/significance_report.csv`](data/significance_report.csv)
+Significance tests: [`data/significance_report.csv`](data/significance_report.csv) ·
+Session fatigue data: [`data/session_fatigue_report.csv`](data/session_fatigue_report.csv)
 <!-- STATS:END -->
 
 ## Setup
