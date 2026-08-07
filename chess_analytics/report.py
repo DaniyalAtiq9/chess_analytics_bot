@@ -92,8 +92,49 @@ def build_charts(clean_df):
         plt.close(fig)
     print(f"Saved charts to {config.CHARTS_DIR}/")
 
+def build_session_fatigue_chart(summary):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
 
-def update_readme(clean_df, sig_df):
+    if summary.empty:
+        print("Session fatigue: no positions meet the games-per-position floor, skipping chart")
+        return
+
+    fig, ax = plt.subplots(figsize=(max(8, len(summary) * 1.2), 6))
+    fig.patch.set_facecolor("black")
+    ax.set_facecolor("black")
+
+    colors = ["#00C853" if v >= 0 else "#FF1744" for v in summary["mean_delta"]]
+    ax.bar(summary["position_label"], summary["mean_delta"], color=colors, edgecolor="white", linewidth=0.6)
+    ax.axhline(0, color="white", linewidth=1)
+
+    for i, row in enumerate(summary.itertuples()):
+        y = row.mean_delta
+        ax.text(i, y + (0.01 if y >= 0 else -0.01), f"n={row.n_games}",
+                 ha="center", va="bottom" if y >= 0 else "top", fontsize=8, color="white")
+
+    ax.set_title("Performance vs. Elo expectation, by position in session", color="white", fontsize=13, pad=15)
+    ax.set_xlabel("Game # within session (same-sitting, same time class)", color="white", fontsize=10)
+    ax.set_ylabel("Mean performance delta (actual − expected score)", color="white", fontsize=10)
+    ax.tick_params(colors="white")
+    for spine in ["bottom", "left"]:
+        ax.spines[spine].set_color("white")
+    for spine in ["top", "right"]:
+        ax.spines[spine].set_visible(False)
+
+    plt.tight_layout()
+    plt.savefig(config.CHARTS_DIR / "session_fatigue.png", dpi=150, facecolor="black")
+    plt.close(fig)
+    print("Saved charts/session_fatigue.png")
+
+
+
+
+
+
+
+def update_readme(clean_df, sig_df, session_summary=None, session_meta=None):
     """
     Rewrites the auto-generated block in README.md between the markers
     below. Everything outside the markers (setup instructions, design
@@ -138,6 +179,30 @@ def update_readme(clean_df, sig_df):
             "least one country/format combo)._"
         )
 
+    if session_meta is None or session_summary is None or session_summary.empty:
+        fatigue_lines = "_Not enough session data yet to test for fatigue._"
+    else:
+        trend_p = session_meta.get("trend_p")
+        step_p = session_meta.get("step_change_p")
+        step_delta = session_meta.get("step_change_delta")
+
+        parts = [f"Based on {session_meta['n_sessions']} inferred sessions, {session_meta['n_games_analyzed']} games."]
+
+        if trend_p is not None:
+            trend_verdict = "a statistically real trend" if trend_p < 0.05 else "not distinguishable from no trend"
+            parts.append(f"Position-vs-performance correlation: ρ={session_meta['trend_rho']}, p={trend_p} — {trend_verdict}.")
+
+        if step_p is not None:
+            step_verdict = "a statistically real step-change" if step_p < 0.05 else "not distinguishable from noise"
+            direction = "worse" if step_delta < 0 else "better"
+            parts.append(f"First game of session vs. later games: later games score {direction} by "
+                         f"{abs(step_delta):.3f} on average, p={step_p} — {step_verdict}.")
+
+        parts.append("_Both tests use α=0.05 uncorrected for this specific comparison — treat a single "
+                     "borderline p-value as a lead to watch over time, not a confirmed effect, same caveat "
+                     "as the country analysis._")
+        fatigue_lines = " ".join(parts)
+
     block = f"""{start_marker}
 ### Last updated: {pd.Timestamp.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
 
@@ -148,13 +213,20 @@ does *not* correct across repeated daily runs; see notes in `chess_analytics/sta
 
 {flagged_lines}
 
+**Session fatigue** (does performance decline the longer you play in one sitting? —
+sessions inferred from time gaps, see `chess_analytics/sessions.py`):
+
+{fatigue_lines}
+
 **Charts:**
 
 ![Blitz outcomes by country](charts/outcome_clustered_blitz.png)
 ![Rapid outcomes by country](charts/outcome_clustered_rapid.png)
+![Session fatigue](charts/session_fatigue.png)
 
 Full tables: [`data/country_outcome_tables.xlsx`](data/country_outcome_tables.xlsx) ·
-Raw significance test output: [`data/significance_report.csv`](data/significance_report.csv)
+Significance tests: [`data/significance_report.csv`](data/significance_report.csv) ·
+Session fatigue data: [`data/session_fatigue_report.csv`](data/session_fatigue_report.csv)
 {end_marker}"""
 
     new_content = re.sub(
