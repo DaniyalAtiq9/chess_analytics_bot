@@ -7,7 +7,7 @@ place. Read this file to understand *what* the pipeline does, in order; read
 the individual modules to understand *how*.
 """
 
-from chess_analytics import cache, config, fetch, report, sessions, stats, transform
+from chess_analytics import cache, config, fetch, milestones, report, sessions, stats, transform
 
 
 def main():
@@ -42,11 +42,13 @@ def main():
     report.build_country_tables(clean_df)
     report.build_charts(clean_df)
     sig_df = stats.build_significance_report(clean_df)
+    peak_df = milestones.build_peak_rating_report(clean_df)
 
     session_summary, session_meta = sessions.build_session_fatigue_report(clean_df)
     report.build_session_fatigue_chart(session_summary)
 
-    report.update_readme(clean_df, sig_df, session_summary, session_meta)
+    report.build_peak_rating_charts(clean_df, peak_df)
+    report.update_readme(clean_df, sig_df, session_summary, session_meta, peak_df)
 
     print("=== Done ===")
 

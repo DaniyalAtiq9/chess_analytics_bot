@@ -8,6 +8,10 @@ import re
 
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
 
 from . import config
 
@@ -35,10 +39,6 @@ def build_country_tables(clean_df):
 
 
 def build_charts(clean_df):
-    import matplotlib
-    matplotlib.use("Agg")  # headless — no display available in CI
-    import matplotlib.pyplot as plt
-
     for tc in ["blitz", "rapid"]:
         sub = clean_df[(clean_df["time_class"] == tc) & (clean_df["country_name"].notna())]
         stats = (
@@ -93,10 +93,6 @@ def build_charts(clean_df):
     print(f"Saved charts to {config.CHARTS_DIR}/")
 
 def build_session_fatigue_chart(summary):
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
     if summary.empty:
         print("Session fatigue: no positions meet the games-per-position floor, skipping chart")
         return
@@ -128,13 +124,48 @@ def build_session_fatigue_chart(summary):
     plt.close(fig)
     print("Saved charts/session_fatigue.png")
 
+def build_peak_rating_charts(clean_df, peak_df):
+    for tc in ["blitz", "rapid"]:
+        sub = clean_df[clean_df["time_class"] == tc].sort_values("date").reset_index(drop=True)
+        if sub.empty or peak_df.empty or tc not in peak_df["time_class"].values:
+            print(f"{tc}: no data for rating progression chart, skipping")
+            continue
+
+        peak_row = peak_df[peak_df["time_class"] == tc].iloc[0]
+        game_numbers = range(1, len(sub) + 1)
+
+        fig, ax = plt.subplots(figsize=(12, 6))
+        fig.patch.set_facecolor("black")
+        ax.set_facecolor("black")
+
+        ax.plot(game_numbers, sub["my_rating"], color="#00C853", linewidth=1.2)
+
+        peak_x = peak_row["games_to_reach_peak"]
+        peak_y = peak_row["peak_rating"]
+        ax.scatter([peak_x], [peak_y], color="#FFFFFF", s=60, zorder=5, edgecolor="#00C853", linewidth=1.5)
+        ax.annotate(
+            f"Peak: {int(peak_y)}\n(game {int(peak_x)} of {int(peak_row['total_games_in_format'])})",
+            xy=(peak_x, peak_y), xytext=(peak_x, peak_y + (sub["my_rating"].max() - sub["my_rating"].min()) * 0.08),
+            color="white", fontsize=10, ha="center",
+            arrowprops=dict(arrowstyle="->", color="white", lw=1),
+        )
+
+        ax.set_title(f"{tc.capitalize()} rating progression", color="white", fontsize=14, pad=15)
+        ax.set_xlabel("Rated game # (chronological)", color="white", fontsize=10)
+        ax.set_ylabel("Rating", color="white", fontsize=10)
+        ax.tick_params(colors="white")
+        for spine in ["bottom", "left"]:
+            ax.spines[spine].set_color("white")
+        for spine in ["top", "right"]:
+            ax.spines[spine].set_visible(False)
+
+        plt.tight_layout()
+        plt.savefig(config.CHARTS_DIR / f"rating_progression_{tc}.png", dpi=150, facecolor="black")
+        plt.close(fig)
+    print("Saved rating progression charts")
 
 
-
-
-
-
-def update_readme(clean_df, sig_df, session_summary=None, session_meta=None):
+def update_readme(clean_df, sig_df, session_summary=None, session_meta=None, peak_df=None):
     """
     Rewrites the auto-generated block in README.md between the markers
     below. Everything outside the markers (setup instructions, design
@@ -203,6 +234,18 @@ def update_readme(clean_df, sig_df, session_summary=None, session_meta=None):
                      "as the country analysis._")
         fatigue_lines = " ".join(parts)
 
+    if peak_df is None or peak_df.empty:
+        peak_lines = "_Not enough rated games yet in blitz/rapid to report a peak._"
+    else:
+        peak_parts = []
+        for r in peak_df.itertuples():
+            status = "— that's still your peak right now" if r.currently_at_peak else "— you've since come back down from it"
+            peak_parts.append(
+                f"- **{r.time_class.capitalize()}**: peak rating **{r.peak_rating}**, reached after "
+                f"{r.games_to_reach_peak} of {r.total_games_in_format} rated games, on {r.peak_date.date()} {status}"
+            )
+        peak_lines = "\n".join(peak_parts)
+
     block = f"""{start_marker}
 ### Last updated: {pd.Timestamp.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
 
@@ -218,15 +261,23 @@ sessions inferred from time gaps, see `chess_analytics/sessions.py`):
 
 {fatigue_lines}
 
+**Peak rating** (see `chess_analytics/milestones.py` — this is a moving target, updates as new games are added):
+
+{peak_lines}
+
+
 **Charts:**
 
 ![Blitz outcomes by country](charts/outcome_clustered_blitz.png)
 ![Rapid outcomes by country](charts/outcome_clustered_rapid.png)
 ![Session fatigue](charts/session_fatigue.png)
+![Blitz rating progression](charts/rating_progression_blitz.png)
+![Rapid rating progression](charts/rating_progression_rapid.png)
 
 Full tables: [`data/country_outcome_tables.xlsx`](data/country_outcome_tables.xlsx) ·
 Significance tests: [`data/significance_report.csv`](data/significance_report.csv) ·
-Session fatigue data: [`data/session_fatigue_report.csv`](data/session_fatigue_report.csv)
+Session fatigue data: [`data/session_fatigue_report.csv`](data/session_fatigue_report.csv) ·
+Peak rating data: [`data/peak_rating_report.csv`](data/peak_rating_report.csv)
 {end_marker}"""
 
     new_content = re.sub(

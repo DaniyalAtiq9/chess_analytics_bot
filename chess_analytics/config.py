@@ -30,6 +30,7 @@ OPP_CACHE_PATH = DATA_DIR / "opponent_cache.json"
 TABLES_PATH = DATA_DIR / "country_outcome_tables.xlsx"
 SIGNIFICANCE_PATH = DATA_DIR / "significance_report.csv"
 SESSION_FATIGUE_PATH = DATA_DIR / "session_fatigue_report.csv"
+PEAK_RATING_PATH = DATA_DIR / "peak_rating_report.csv"
 README_PATH = Path("README.md")
 
 # floor for anything reported/charted per country — do not lower casually,
