@@ -54199,3 +54199,51 @@ date,time_control,time_class,rated,rules,color,my_rating,opp_rating,opp_username
 
 1. e4 {[%clk 0:00:00]} 1... c6 {[%clk 0:00:00.6]} 2. Nf3 {[%clk 3:06:57.8]} 1-0
 ",https://www.chess.com/game/daily/1013969846,rnbqkbnr/pp1ppppp/2p5/8/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2,2026-08-15 07:05:06,PK,Pakistan,loss,59,False
+2026-08-20 16:19:04,180,blitz,True,chess,black,821,789,Justsomenutter,win,https://www.chess.com/openings/Caro-Kann-Defense-Gurgenidze-System-4.Nf3,92,44,0:02:59.9,0:02:10.4,"[Event ""Live Chess""]
+[Site ""Chess.com""]
+[Date ""2026.08.20""]
+[Round ""-""]
+[White ""Justsomenutter""]
+[Black ""daniyaltered""]
+[Result ""0-1""]
+[CurrentPosition ""r3q1k1/1b3p1p/2p2bpB/p5N1/p2P4/3B4/5PPP/1R1n2K1 w - - 0 23""]
+[Timezone ""UTC""]
+[ECO ""B15""]
+[ECOUrl ""https://www.chess.com/openings/Caro-Kann-Defense-Gurgenidze-System-4.Nf3""]
+[UTCDate ""2026.08.20""]
+[UTCTime ""16:16:45""]
+[WhiteElo ""789""]
+[BlackElo ""821""]
+[TimeControl ""180""]
+[Termination ""daniyaltered won by resignation""]
+[StartTime ""16:16:45""]
+[EndDate ""2026.08.20""]
+[EndTime ""16:19:04""]
+[Link ""https://www.chess.com/game/live/173275283196""]
+
+1. e4 {[%clk 0:02:59.9]} 1... g6 {[%clk 0:02:58.3]} 2. d4 {[%clk 0:02:58.7]} 2... c6 {[%clk 0:02:57.5]} 3. Nc3 {[%clk 0:02:57.2]} 3... d5 {[%clk 0:02:56.8]} 4. Nf3 {[%clk 0:02:56.7]} 4... dxe4 {[%clk 0:02:55]} 5. Nxe4 {[%clk 0:02:55.4]} 5... Bg7 {[%clk 0:02:54.1]} 6. Bc4 {[%clk 0:02:52.8]} 6... e6 {[%clk 0:02:51]} 7. Nfg5 {[%clk 0:02:50.2]} 7... Nf6 {[%clk 0:02:48.1]} 8. Nxf6+ {[%clk 0:02:46.9]} 8... Bxf6 {[%clk 0:02:46]} 9. Nf3 {[%clk 0:02:41.6]} 9... O-O {[%clk 0:02:44.7]} 10. O-O {[%clk 0:02:38.5]} 10... Re8 {[%clk 0:02:43.6]} 11. Bh6 {[%clk 0:02:37.4]} 11... b5 {[%clk 0:02:41.3]} 12. Bb3 {[%clk 0:02:35.9]} 12... Nd7 {[%clk 0:02:37.7]} 13. c3 {[%clk 0:02:34.9]} 13... e5 {[%clk 0:02:36.1]} 14. Re1 {[%clk 0:02:31.9]} 14... exd4 {[%clk 0:02:33.6]} 15. Rxe8+ {[%clk 0:02:30.6]} 15... Qxe8 {[%clk 0:02:31.6]} 16. cxd4 {[%clk 0:02:29.6]} 16... Nb6 {[%clk 0:02:28.1]} 17. Rc1 {[%clk 0:02:19.2]} 17... Bb7 {[%clk 0:02:24.1]} 18. Ng5 {[%clk 0:02:00.8]} 18... a5 {[%clk 0:02:20.3]} 19. a4 {[%clk 0:01:54.4]} 19... bxa4 {[%clk 0:02:17.1]} 20. Bc2 {[%clk 0:01:53.3]} 20... Nc4 {[%clk 0:02:14.8]} 21. Bd3 {[%clk 0:01:51.5]} 21... Nxb2 {[%clk 0:02:12.6]} 22. Rb1 {[%clk 0:01:50.4]} 22... Nxd1 {[%clk 0:02:10.4]} 0-1
+",https://www.chess.com/game/live/173275283196,r3q1k1/1b3p1p/2p2bpB/p5N1/p2P4/3B4/5PPP/1R1n2K1 w - - 0 23,,GB,United Kingdom,win,32,False
+2026-08-20 18:05:33,180,blitz,True,chess,white,813,816,waexade,checkmated,https://www.chess.com/openings/Alekhines-Defense,116,60,0:02:58.3,0:01:29.2,"[Event ""Live Chess""]
+[Site ""Chess.com""]
+[Date ""2026.08.20""]
+[Round ""-""]
+[White ""daniyaltered""]
+[Black ""waexade""]
+[Result ""0-1""]
+[CurrentPosition ""Bn3k2/p5pp/5p2/1b6/8/PP6/6PP/4q1K1 w - - 1 31""]
+[Timezone ""UTC""]
+[ECO ""B02""]
+[ECOUrl ""https://www.chess.com/openings/Alekhines-Defense""]
+[UTCDate ""2026.08.20""]
+[UTCTime ""18:01:46""]
+[WhiteElo ""813""]
+[BlackElo ""816""]
+[TimeControl ""180""]
+[Termination ""waexade won by checkmate""]
+[StartTime ""18:01:46""]
+[EndDate ""2026.08.20""]
+[EndTime ""18:05:33""]
+[Link ""https://www.chess.com/game/live/173279974068""]
+
+1. e4 {[%clk 0:02:58.3]} 1... Nf6 {[%clk 0:02:59.2]} 2. Bc4 {[%clk 0:02:57.3]} 2... Nxe4 {[%clk 0:02:58.2]} 3. Nc3 {[%clk 0:02:56.1]} 3... Nxf2 {[%clk 0:02:55.7]} 4. Kxf2 {[%clk 0:02:54.6]} 4... e6 {[%clk 0:02:55.1]} 5. Nf3 {[%clk 0:02:53.5]} 5... Bc5+ {[%clk 0:02:54.3]} 6. Kg3 {[%clk 0:02:47.1]} 6... c6 {[%clk 0:02:52.4]} 7. Re1 {[%clk 0:02:45.1]} 7... Qc7+ {[%clk 0:02:50.6]} 8. Re5 {[%clk 0:02:33]} 8... Bd6 {[%clk 0:02:48.1]} 9. d4 {[%clk 0:02:30.2]} 9... c5 {[%clk 0:02:43.8]} 10. Bf4 {[%clk 0:02:24.7]} 10... f6 {[%clk 0:02:40.1]} 11. Rxe6+ {[%clk 0:02:21]} 11... dxe6 {[%clk 0:02:33]} 12. Bxd6 {[%clk 0:02:19.6]} 12... Qxd6+ {[%clk 0:02:31.9]} 13. Kf2 {[%clk 0:02:16.1]} 13... O-O {[%clk 0:02:28.7]} 14. Kg1 {[%clk 0:02:13.5]} 14... Rd8 {[%clk 0:02:21.6]} 15. a3 {[%clk 0:02:10.6]} 15... Qf4 {[%clk 0:02:14.9]} 16. dxc5 {[%clk 0:02:06.2]} 16... Rxd1+ {[%clk 0:02:13]} 17. Rxd1 {[%clk 0:02:00.9]} 17... Qe3+ {[%clk 0:02:11]} 18. Kf1 {[%clk 0:01:56.3]} 18... Bd7 {[%clk 0:02:03]} 19. Nd5 {[%clk 0:01:49.9]} 19... exd5 {[%clk 0:01:59.3]} 20. Bxd5+ {[%clk 0:01:47.4]} 20... Kf8 {[%clk 0:01:58.5]} 21. Re1 {[%clk 0:01:43.4]} 21... Qxc5 {[%clk 0:01:55]} 22. c4 {[%clk 0:01:36.4]} 22... b5 {[%clk 0:01:51.9]} 23. Bxa8 {[%clk 0:01:32]} 23... bxc4 {[%clk 0:01:50.2]} 24. Nd2 {[%clk 0:01:28.3]} 24... Bb5 {[%clk 0:01:48]} 25. Rd1 {[%clk 0:01:23.2]} 25... c3+ {[%clk 0:01:46.7]} 26. Ke1 {[%clk 0:01:18.9]} 26... cxd2+ {[%clk 0:01:45.5]} 27. Rxd2 {[%clk 0:01:17]} 27... Qe5+ {[%clk 0:01:36.4]} 28. Kf2 {[%clk 0:01:13.3]} 28... Qf4+ {[%clk 0:01:31.9]} 29. Kg1 {[%clk 0:01:11.6]} 29... Qxd2 {[%clk 0:01:30.5]} 30. b3 {[%clk 0:01:08.1]} 30... Qe1# {[%clk 0:01:29.2]} 0-1
+",https://www.chess.com/game/live/173279974068,Bn3k2/p5pp/5p2/1b6/8/PP6/6PP/4q1K1 w - - 1 31,,RU,Russian Federation,loss,-3,False
