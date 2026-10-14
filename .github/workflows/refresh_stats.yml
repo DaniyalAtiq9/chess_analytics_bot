@@ -30,6 +30,7 @@ jobs:
         env:
           CHESS_USERNAME: ${{ vars.CHESS_USERNAME }}
           CHESS_CONTACT_EMAIL: ${{ vars.CHESS_CONTACT_EMAIL }}
+          CHESS_FORMER_USERNAMES: ${{ vars.CHESS_FORMER_USERNAMES }}
         run: python main.py
 
       - name: Commit updated data and charts
