@@ -20,6 +20,10 @@ if not USERNAME or not CONTACT_EMAIL:
 
 HEADERS = {"User-Agent": f"chess-analytics-bot ({CONTACT_EMAIL})"}
 
+# optional, comma-separated: usernames I used to have. Games chess.com still
+# labels with an old name are matched as mine instead of being mis-attributed.
+FORMER_USERNAMES = [u.strip().lower() for u in os.environ.get("CHESS_FORMER_USERNAMES", "").split(",") if u.strip()]
+
 DATA_DIR = Path("data")
 CHARTS_DIR = Path("charts")
 DATA_DIR.mkdir(exist_ok=True)

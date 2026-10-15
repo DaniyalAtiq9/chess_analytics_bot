@@ -36,8 +36,17 @@ def get_with_retry(url, headers=None, max_retries=config.MAX_RETRIES):
 
 
 def get_archive_urls():
-    resp = get_with_retry(f"https://api.chess.com/pub/player/{config.USERNAME}/games/archives")
-    return resp.json()["archives"]
+    url = f"https://api.chess.com/pub/player/{config.USERNAME}/games/archives"
+    resp = get_with_retry(url)
+    if resp.status_code != 200:
+        raise RuntimeError(
+            f"Archive list request failed for username {config.USERNAME!r}: "
+            f"HTTP {resp.status_code}, body: {resp.text[:200]}"
+        )
+    data = resp.json()
+    if "archives" not in data:
+        raise RuntimeError(f"Unexpected archives response, keys: {list(data.keys())}")
+    return data["archives"]
 
 
 def months_to_refetch(archive_urls, existing_df):
@@ -78,7 +87,19 @@ def fetch_games_for_months(urls):
 
 def _flatten_game(g):
     white, black = g.get("white", {}), g.get("black", {})
-    is_white = white.get("username", "").lower() == config.USERNAME.lower()
+    my_names = {config.USERNAME.lower(), *config.FORMER_USERNAMES}
+    white_name = white.get("username", "").lower()
+    black_name = black.get("username", "").lower()
+    if white_name in my_names:
+        is_white = True
+    elif black_name in my_names:
+        is_white = False
+    else:
+        raise ValueError(
+            f"Neither side of game {g.get('url')} matches {sorted(my_names)}: "
+            f"white={white_name!r}, black={black_name!r}. If you renamed your account, "
+            f"add the old name to the CHESS_FORMER_USERNAMES variable."
+        )
     me, opp = (white, black) if is_white else (black, white)
 
     pgn = g.get("pgn", "")

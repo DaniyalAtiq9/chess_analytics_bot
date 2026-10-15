@@ -51961,12 +51961,12 @@ date,time_control,time_class,rated,rules,color,my_rating,opp_rating,opp_username
 
 1. e4 {[%clk 0:02:59.8]} 1... e5 {[%clk 0:02:59]} 2. Bc4 {[%clk 0:02:58.8]} 2... Nc6 {[%clk 0:02:58.4]} 3. Nc3 {[%clk 0:02:58.1]} 3... Nf6 {[%clk 0:02:57.7]} 4. Nf3 {[%clk 0:02:57.5]} 4... Bc5 {[%clk 0:02:57]} 5. d3 {[%clk 0:02:56.6]} 5... O-O {[%clk 0:02:56.1]} 6. h3 {[%clk 0:02:55.7]} 6... d6 {[%clk 0:02:55.4]} 7. Bg5 {[%clk 0:02:54.9]} 7... h6 {[%clk 0:02:54.7]} 8. Bxf6 {[%clk 0:02:53.8]} 8... Qxf6 {[%clk 0:02:54.2]} 9. O-O {[%clk 0:02:52.9]} 9... Nd4 {[%clk 0:02:52.5]} 10. Nxd4 {[%clk 0:02:49.2]} 10... Bxd4 {[%clk 0:02:51.6]} 11. Re1 {[%clk 0:02:45.8]} 11... Bxc3 {[%clk 0:02:50.4]} 12. bxc3 {[%clk 0:02:44.6]} 12... c6 {[%clk 0:02:49.2]} 13. d4 {[%clk 0:02:43.6]} 13... d5 {[%clk 0:02:47.7]} 14. Bb3 {[%clk 0:02:42.2]} 14... exd4 {[%clk 0:02:45.6]} 15. cxd4 {[%clk 0:02:41]} 15... Be6 {[%clk 0:02:40.3]} 16. e5 {[%clk 0:02:37.3]} 16... Qf5 {[%clk 0:02:37.3]} 17. c3 {[%clk 0:02:33.7]} 17... f6 {[%clk 0:02:36.1]} 18. Bc2 {[%clk 0:02:32.2]} 18... fxe5 {[%clk 0:02:34.5]} 19. Bxf5 {[%clk 0:02:30.7]} 19... Bxf5 {[%clk 0:02:33.8]} 20. Rxe5 {[%clk 0:02:28.7]} 20... g6 {[%clk 0:02:29.3]} 21. g4 {[%clk 0:02:16.1]} 21... Bd7 {[%clk 0:02:26.3]} 22. Re7 {[%clk 0:02:12.9]} 22... Rad8 {[%clk 0:02:23.9]} 23. Qc1 {[%clk 0:02:09]} 23... g5 {[%clk 0:02:20]} 24. h4 {[%clk 0:02:05.4]} 24... Bxg4 {[%clk 0:02:11.3]} 25. hxg5 {[%clk 0:02:01.3]} 25... Rd6 {[%clk 0:02:00.8]} 26. gxh6 {[%clk 0:01:58.1]} 26... Kh8 {[%clk 0:01:57]} 27. Qg5 {[%clk 0:01:55.1]} 27... Rg8 {[%clk 0:01:52.2]} 28. Qe5+ {[%clk 0:01:49.6]} 1-0
 ",https://www.chess.com/game/live/172531043052,6rk/pp2R3/2pr3P/3pQ3/3P2b1/2P5/P4P2/R5K1 b - - 4 28,,US,United States,win,24,False
-2026-08-04 19:06:59,180,blitz,True,chess,white,734,755,YATOjustnato,stalemate,https://www.chess.com/openings/Scandinavian-Defense-Mieses-Kotrc-Main-Line-4.Nf3,331,167,0:02:59.8,0:00:04.2,"[Event ""Live Chess""]
+2026-08-04 19:06:59,180,blitz,True,chess,white,734,755,Undertaker561,stalemate,https://www.chess.com/openings/Scandinavian-Defense-Mieses-Kotrc-Main-Line-4.Nf3,331,167,0:02:59.8,0:00:04.2,"[Event ""Live Chess""]
 [Site ""Chess.com""]
 [Date ""2026.08.04""]
 [Round ""-""]
 [White ""daniyaltered""]
-[Black ""YATOjustnato""]
+[Black ""Undertaker561""]
 [Result ""1/2-1/2""]
 [CurrentPosition ""8/8/8/8/8/5KQ1/8/7k b - - 16 84""]
 [Timezone ""UTC""]
@@ -52639,11 +52639,11 @@ date,time_control,time_class,rated,rules,color,my_rating,opp_rating,opp_username
 
 1. e4 {[%clk 0:02:59.4]} 1... e5 {[%clk 0:02:58.2]} 2. Bc4 {[%clk 0:02:58.3]} 2... Nc6 {[%clk 0:02:57.5]} 3. Nc3 {[%clk 0:02:57.7]} 3... Nf6 {[%clk 0:02:57.1]} 4. Nf3 {[%clk 0:02:57.1]} 4... d6 {[%clk 0:02:55.9]} 5. h3 {[%clk 0:02:56.6]} 5... Be7 {[%clk 0:02:53.1]} 6. O-O {[%clk 0:02:56]} 1-0
 ",https://www.chess.com/game/live/172630711506,r1bqk2r/ppp1bppp/2np1n2/4p3/2B1P3/2N2N1P/PPPP1PP1/R1BQ1RK1 b kq - 2 6,,US,United States,win,7,False
-2026-08-06 22:09:05,180,blitz,True,chess,black,727,707,Sicangu_Lakota_Oyate,stalemate,https://www.chess.com/openings/Caro-Kann-Defense-Gurgenidze-System-4.e5,230,114,0:02:58.2,0:00:58.4,"[Event ""Live Chess""]
+2026-08-06 22:09:05,180,blitz,True,chess,black,727,707,burninworms,stalemate,https://www.chess.com/openings/Caro-Kann-Defense-Gurgenidze-System-4.e5,230,114,0:02:58.2,0:00:58.4,"[Event ""Live Chess""]
 [Site ""Chess.com""]
 [Date ""2026.08.06""]
 [Round ""-""]
-[White ""Sicangu_Lakota_Oyate""]
+[White ""burninworms""]
 [Black ""daniyaltered""]
 [Result ""1/2-1/2""]
 [CurrentPosition ""8/8/8/8/2n5/p7/1rk5/K7 w - - 24 58""]
