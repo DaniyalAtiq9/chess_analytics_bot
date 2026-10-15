@@ -107,6 +107,6 @@ Daily at 06:17 UTC (see `.github/workflows/refresh_stats.yml`).
 
 **Why this is split this way:** nothing here is reused outside this one
 pipeline and there's no test suite, so the split isn't buying reuse or
-testability — it's purely so no single file is more than ~150 lines and each
+testability — it's purely so no single file becomes huge and each
 one answers one question ("how do we fetch," "how do we cache," "how do we
 decide what's significant") on its own. 
