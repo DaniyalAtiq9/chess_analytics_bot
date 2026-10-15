@@ -55,7 +55,8 @@ def build_session_fatigue_report(clean_df):
 
     summary = (
         df.groupby("position_bucket")
-        .agg(n_games=("performance_delta", "count"), mean_delta=("performance_delta", "mean"))
+        .agg(n_games=("performance_delta", "count"), mean_delta=("performance_delta", "mean"),
+             sem_delta=("performance_delta", "sem"))
         .reset_index()
     )
     summary = summary[summary["n_games"] >= config.MIN_GAMES_PER_POSITION]

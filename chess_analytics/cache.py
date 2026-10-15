@@ -18,7 +18,7 @@ from .fetch import get_with_retry
 
 def load_cache():
     if config.OPP_CACHE_PATH.exists():
-        with open(config.OPP_CACHE_PATH) as f:
+        with open(config.OPP_CACHE_PATH, encoding="utf-8") as f:
             cache = json.load(f)
         print(f"Loaded opponent cache: {len(cache)} known opponents")
         return cache
@@ -26,7 +26,7 @@ def load_cache():
 
 
 def save_cache(cache):
-    with open(config.OPP_CACHE_PATH, "w") as f:
+    with open(config.OPP_CACHE_PATH, "w", encoding="utf-8") as f:
         json.dump(cache, f, indent=1)
 
 

@@ -38,6 +38,24 @@ def build_country_tables(clean_df):
     print(f"Saved {config.TABLES_PATH}")
 
 
+# ---- chart styling -------------------------------------------------------
+# Sized for a phone feed (LinkedIn/X render ~1080px wide). Base font 14pt at
+# 150 dpi so axis text survives downscaling. One palette, no white edges.
+BG, FG, MUTED = "#0E1117", "#E6E6E6", "#8A8F98"
+C_WIN, C_DRAW, C_LOSS = "#2ECC71", "#95A5A6", "#E74C3C"
+
+
+def _style_axes(ax):
+    ax.set_facecolor(BG)
+    ax.tick_params(colors=FG, labelsize=13, length=0)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("bottom", "left"):
+        ax.spines[s].set_color(MUTED)
+    ax.grid(axis="x", color=MUTED, alpha=0.15, linewidth=0.8)
+    ax.set_axisbelow(True)
+
+
 def build_charts(clean_df):
     for tc in ["blitz", "rapid"]:
         sub = clean_df[(clean_df["time_class"] == tc) & (clean_df["country_name"].notna())]
@@ -52,77 +70,82 @@ def build_charts(clean_df):
         if stats.empty:
             print(f"{tc}: no countries meet the {config.MIN_GAMES}-game floor, skipping chart")
             continue
-        stats = stats.loc[counts[stats.index].sort_values(ascending=False).index]
+        # most games at the top; horizontal so 16 labels stay readable on a phone
+        stats = stats.loc[counts[stats.index].sort_values(ascending=True).index]
+        overall_win = (sub["outcome"] == "win").mean()
 
         n = len(stats)
-        x = np.arange(n) * 1.6
-        width = 0.4
+        fig, ax = plt.subplots(figsize=(8, max(6, 0.5 * n + 2.2)))
+        fig.patch.set_facecolor(BG)
+        _style_axes(ax)
 
-        fig, ax = plt.subplots(figsize=(max(12, n * 1.4), 7))
-        fig.patch.set_facecolor("black")
-        ax.set_facecolor("black")
+        y = np.arange(n)
+        ax.barh(y, stats["win"], color=C_WIN, label="Win")
+        ax.barh(y, stats["draw"], left=stats["win"], color=C_DRAW, label="Draw")
+        ax.barh(y, stats["loss"], left=stats["win"] + stats["draw"], color=C_LOSS, label="Loss")
 
-        ax.bar(x - width, stats["win"], width, label="Win", color="#00C853", edgecolor="white", linewidth=0.6)
-        ax.bar(x, stats["draw"], width, label="Draw", color="#FFFFFF", edgecolor="white", linewidth=0.6)
-        ax.bar(x + width, stats["loss"], width, label="Loss", color="#FF1744", edgecolor="white", linewidth=0.6)
+        for i, (country, row) in enumerate(stats.iterrows()):
+            ax.text(row["win"] / 2, i, f"{row['win']:.0%}", ha="center", va="center",
+                    fontsize=11, color=BG, fontweight="bold")
 
-        for i, country in enumerate(stats.index):
-            ax.text(x[i], max(stats.iloc[i]) + 0.06, f"Total games: {counts[country]}",
-                     ha="center", fontsize=9, color="white")
+        ax.axvline(overall_win, color=FG, linewidth=1.2, linestyle="--", alpha=0.8)
+        ax.text(overall_win, n - 0.3, f" overall win rate {overall_win:.0%}", color=FG,
+                fontsize=11, va="bottom", ha="left")
 
-        ax.set_title(f"{tc.capitalize()} — win/draw/loss rate by opponent country (min {config.MIN_GAMES} games)",
-                     color="white", fontsize=14, pad=20)
-        ax.set_ylabel("Share of games (proportion, 0–1)", color="white", fontsize=11)
-        ax.set_ylim(0, 1.15)
-        ax.set_xticks(x)
-        ax.set_xticklabels(stats.index, rotation=30, ha="right", color="white", fontsize=10)
-        ax.tick_params(axis="y", colors="white", labelsize=10)
-        ax.spines["bottom"].set_color("white")
-        ax.spines["left"].set_color("white")
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-
-        legend = ax.legend(title="Outcome", facecolor="black", edgecolor="white", loc="upper right", fontsize=10)
-        legend.get_title().set_color("white")
-        for text in legend.get_texts():
-            text.set_color("white")
+        ax.set_yticks(y)
+        ax.set_yticklabels([f"{c}  (n={counts[c]})" for c in stats.index], color=FG, fontsize=13)
+        ax.set_xlim(0, 1)
+        ax.set_xticks([0, 0.25, 0.5, 0.75, 1])
+        ax.set_xticklabels(["0%", "25%", "50%", "75%", "100%"])
+        ax.set_ylim(-0.6, n + 0.4)
+        ax.set_title(f"{tc.capitalize()}: my results by opponent country\n"
+                     f"{config.MIN_GAMES}+ games each. Nothing significant after correction.",
+                     color=FG, fontsize=15, loc="left", pad=36)
+        leg = ax.legend(ncol=3, loc="lower left", bbox_to_anchor=(0, 1.0), frameon=False,
+                        fontsize=12, handlelength=1.2, columnspacing=1.4)
+        for t in leg.get_texts():
+            t.set_color(FG)
 
         plt.tight_layout()
-        plt.savefig(config.CHARTS_DIR / f"outcome_clustered_{tc}.png", dpi=150, facecolor="black")
+        plt.savefig(config.CHARTS_DIR / f"outcome_clustered_{tc}.png", dpi=150, facecolor=BG)
         plt.close(fig)
     print(f"Saved charts to {config.CHARTS_DIR}/")
+
 
 def build_session_fatigue_chart(summary):
     if summary.empty:
         print("Session fatigue: no positions meet the games-per-position floor, skipping chart")
         return
 
-    fig, ax = plt.subplots(figsize=(max(8, len(summary) * 1.2), 6))
-    fig.patch.set_facecolor("black")
-    ax.set_facecolor("black")
+    fig, ax = plt.subplots(figsize=(8, 6))
+    fig.patch.set_facecolor(BG)
+    _style_axes(ax)
+    ax.grid(axis="y", color=MUTED, alpha=0.15, linewidth=0.8)
+    ax.grid(axis="x", visible=False)
 
-    colors = ["#00C853" if v >= 0 else "#FF1744" for v in summary["mean_delta"]]
-    ax.bar(summary["position_label"], summary["mean_delta"], color=colors, edgecolor="white", linewidth=0.6)
-    ax.axhline(0, color="white", linewidth=1)
+    x = np.arange(len(summary))
+    vals = summary["mean_delta"].to_numpy()
+    err = 1.96 * summary["sem_delta"].to_numpy() if "sem_delta" in summary else None
+    colors = [C_WIN if v >= 0 else C_LOSS for v in vals]
+    ax.bar(x, vals, color=colors, width=0.7)
+    if err is not None:
+        ax.errorbar(x, vals, yerr=err, fmt="none", ecolor=FG, elinewidth=1.2, capsize=4, alpha=0.9)
+    ax.axhline(0, color=FG, linewidth=1)
 
-    for i, row in enumerate(summary.itertuples()):
-        y = row.mean_delta
-        ax.text(i, y + (0.01 if y >= 0 else -0.01), f"n={row.n_games}",
-                 ha="center", va="bottom" if y >= 0 else "top", fontsize=8, color="white")
-
-    ax.set_title("Performance vs. Elo expectation, by position in session", color="white", fontsize=13, pad=15)
-    ax.set_xlabel("Game # within session (same-sitting, same time class)", color="white", fontsize=10)
-    ax.set_ylabel("Mean performance delta (actual − expected score)", color="white", fontsize=10)
-    ax.tick_params(colors="white")
-    for spine in ["bottom", "left"]:
-        ax.spines[spine].set_color("white")
-    for spine in ["top", "right"]:
-        ax.spines[spine].set_visible(False)
+    # n goes under the x tick, never near the bar tops where the CI whiskers live
+    ax.set_xticks(x)
+    ax.set_xticklabels([f"{lbl}\nn={n}" for lbl, n in zip(summary["position_label"], summary["n_games"])],
+                       color=FG, fontsize=13)
+    ax.set_xlabel("Game number within a session", color=FG, fontsize=13, labelpad=8)
+    ax.set_ylabel("Score vs. Elo expectation (mean, 95% CI)", color=FG, fontsize=13)
+    ax.set_title("Do I play worse the longer I sit?\nbars = mean performance delta; whiskers = 95% CI",
+                 color=FG, fontsize=15, loc="left", pad=14)
 
     plt.tight_layout()
-    plt.savefig(config.CHARTS_DIR / "session_fatigue.png", dpi=150, facecolor="black")
+    plt.savefig(config.CHARTS_DIR / "session_fatigue.png", dpi=150, facecolor=BG)
     plt.close(fig)
     print("Saved charts/session_fatigue.png")
+
 
 def build_peak_rating_charts(clean_df, peak_df):
     for tc in ["blitz", "rapid"]:
@@ -175,7 +198,7 @@ def update_readme(clean_df, sig_df, session_summary=None, session_meta=None, pea
         print("README.md not found, skipping README update")
         return
 
-    content = config.README_PATH.read_text()
+    content = config.README_PATH.read_text(encoding="utf-8")
     start_marker = "<!-- STATS:START -->"
     end_marker = "<!-- STATS:END -->"
 
@@ -286,5 +309,5 @@ Peak rating data: [`data/peak_rating_report.csv`](data/peak_rating_report.csv)
         content,
         flags=re.DOTALL,
     )
-    config.README_PATH.write_text(new_content)
+    config.README_PATH.write_text(new_content, encoding="utf-8")
     print("Updated README.md stats block")
