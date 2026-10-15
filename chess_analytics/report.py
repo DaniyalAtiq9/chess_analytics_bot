@@ -98,15 +98,15 @@ def build_charts(clean_df):
         ax.set_xticks([0, 0.25, 0.5, 0.75, 1])
         ax.set_xticklabels(["0%", "25%", "50%", "75%", "100%"])
         ax.set_ylim(-0.6, n + 0.4)
-        ax.set_title(f"{tc.capitalize()}: my results by opponent country\n"
-                     f"{config.MIN_GAMES}+ games each. Nothing significant after correction.",
-                     color=FG, fontsize=15, loc="left", pad=36)
-        leg = ax.legend(ncol=3, loc="lower left", bbox_to_anchor=(0, 1.0), frameon=False,
-                        fontsize=12, handlelength=1.2, columnspacing=1.4)
+        # title + legend anchored to the figure, not the axes, so a long
+        # country label (which shifts the axes right) can't push them off-canvas
+        fig.text(0.02, 0.975, f"{tc.capitalize()}: my results by opponent country", color=FG, fontsize=15, ha="left", va="top")
+        fig.text(0.02, 0.945, f"{config.MIN_GAMES}+ games each. Nothing significant after correction.", color=FG, fontsize=13, ha="left", va="top")
+        leg = fig.legend(ncol=3, loc="upper left", bbox_to_anchor=(0.02, 0.915), frameon=False, fontsize=12, handlelength=1.2, columnspacing=1.4)
         for t in leg.get_texts():
             t.set_color(FG)
 
-        plt.tight_layout()
+        plt.tight_layout(rect=(0, 0, 1, 0.88))
         plt.savefig(config.CHARTS_DIR / f"outcome_clustered_{tc}.png", dpi=150, facecolor=BG)
         plt.close(fig)
     print(f"Saved charts to {config.CHARTS_DIR}/")
