@@ -62311,12 +62311,12 @@ date,time_control,time_class,rated,rules,color,my_rating,opp_rating,opp_username
 
 1. e4 {[%clk 0:09:58]} 1... e5 {[%clk 0:09:58.6]} 2. Bc4 {[%clk 0:09:53.6]} 2... Qh4 {[%clk 0:09:56.4]} 3. d3 {[%clk 0:09:46.7]} 3... Bc5 {[%clk 0:09:52.4]} 4. Qf3 {[%clk 0:09:34.2]} 4... Nf6 {[%clk 0:09:45.9]} 5. Nh3 {[%clk 0:09:29.3]} 5... Ng4 {[%clk 0:09:37.5]} 6. Qxf7+ {[%clk 0:09:19]} 6... Kd8 {[%clk 0:09:34.8]} 7. Bg5+ {[%clk 0:09:11.1]} 7... Qxg5 {[%clk 0:09:24]} 8. Nxg5 {[%clk 0:09:09.2]} 8... Bxf2+ {[%clk 0:09:18.2]} 9. Kf1 {[%clk 0:09:02.8]} 9... Bd4 {[%clk 0:08:19.9]} 10. c3 {[%clk 0:08:57.6]} 10... Nh6 {[%clk 0:07:55.2]} 11. Qxg7 {[%clk 0:08:49.3]} 11... Ng4 {[%clk 0:07:10.5]} 12. Qxh8+ {[%clk 0:08:46.5]} 12... Ke7 {[%clk 0:07:09.5]} 13. Qxh7+ {[%clk 0:08:36.4]} 13... Kd6 {[%clk 0:07:01.2]} 14. Qf7 {[%clk 0:08:31.1]} 14... c6 {[%clk 0:06:30.8]} 15. Na3 {[%clk 0:08:09.7]} 15... Ne3+ {[%clk 0:06:21.9]} 16. Ke2 {[%clk 0:08:08]} 16... Bc5 {[%clk 0:06:07.4]} 17. d4 {[%clk 0:08:03]} 17... exd4 {[%clk 0:06:01.7]} 18. cxd4 {[%clk 0:08:01.9]} 18... Bxd4 {[%clk 0:05:52.3]} 19. Rad1 {[%clk 0:07:56.3]} 19... c5 {[%clk 0:04:17.5]} 20. Qf6+ {[%clk 0:07:50]} 20... Kc7 {[%clk 0:04:07.1]} 21. Nb5# {[%clk 0:07:45.5]} 1-0
 ",https://www.chess.com/game/live/185589821674,rnb5/ppkp4/5Q2/1Np3N1/2BbP3/4n3/PP2K1PP/3R3R b - - 3 21,,AZ,Azerbaijan,win,26,False
-2026-10-19 16:54:39,600,rapid,True,chess,white,905,912,wojtekgajek,win,https://www.chess.com/openings/Kings-Pawn-Opening-Kings-Knight-Variation-2...Nc6,131,65,0:09:59.2,0:07:31.2,"[Event ""Live Chess""]
+2026-10-19 16:54:39,600,rapid,True,chess,white,905,912,Wwojggaj,win,https://www.chess.com/openings/Kings-Pawn-Opening-Kings-Knight-Variation-2...Nc6,131,65,0:09:59.2,0:07:31.2,"[Event ""Live Chess""]
 [Site ""Chess.com""]
 [Date ""2026.10.19""]
 [Round ""-""]
 [White ""daniyal_ar""]
-[Black ""wojtekgajek""]
+[Black ""Wwojggaj""]
 [Result ""1-0""]
 [CurrentPosition ""8/6pp/1N6/n3kp2/4p3/N6P/2R2PP1/R5K1 b - - 0 33""]
 [Timezone ""UTC""]
