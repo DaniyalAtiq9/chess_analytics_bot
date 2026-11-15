@@ -7,9 +7,9 @@ GitHub Actions.
 The API: https://api.chess.com/pub/player/{username}/games/archives gives you a list of monthly archive URLs, each returning full PGNs with clock times if you played with a clock.
 
 <!-- STATS:START -->
-### Last updated: 2026-11-14 13:29 UTC
+### Last updated: 2026-11-15 13:54 UTC
 
-**Dataset:** 2675 rated games, 2023-02-16 to 2026-11-14
+**Dataset:** 2677 rated games, 2023-02-16 to 2026-11-15
 
 **Statistically flagged countries this run** (Bonferroni-corrected within this run's test set —
 does *not* correct across repeated daily runs; see notes in `chess_analytics/stats.py`):
@@ -19,11 +19,11 @@ _No country crosses the Bonferroni-corrected significance threshold this run —
 **Session fatigue** (does performance decline the longer you play in one sitting? —
 sessions inferred from time gaps, see `chess_analytics/sessions.py`):
 
-Based on 1657 inferred sessions, 2675 games. Position-vs-performance correlation: ρ=-0.0325, p=0.0938 — not distinguishable from no trend. First game of session vs. later games: later games score worse by 0.036 on average, p=0.0513 — not distinguishable from noise. _Both tests use α=0.05 uncorrected for this specific comparison — treat a single borderline p-value as a lead to watch over time, not a confirmed effect, same caveat as the country analysis._
+Based on 1658 inferred sessions, 2677 games. Position-vs-performance correlation: ρ=-0.0323, p=0.0957 — not distinguishable from no trend. First game of session vs. later games: later games score worse by 0.036 on average, p=0.0503 — not distinguishable from noise. _Both tests use α=0.05 uncorrected for this specific comparison — treat a single borderline p-value as a lead to watch over time, not a confirmed effect, same caveat as the country analysis._
 
 **Peak rating** (see `chess_analytics/milestones.py` — this is a moving target, updates as new games are added):
 
-- **Blitz**: peak rating **917**, reached after 1068 of 1268 rated games, on 2026-10-06 — you've since come back down from it
+- **Blitz**: peak rating **917**, reached after 1068 of 1270 rated games, on 2026-10-06 — you've since come back down from it
 - **Rapid**: peak rating **986**, reached after 1171 of 1392 rated games, on 2026-04-16 — you've since come back down from it
 
 
