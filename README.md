@@ -7,7 +7,7 @@ GitHub Actions.
 The API: https://api.chess.com/pub/player/{username}/games/archives gives you a list of monthly archive URLs, each returning full PGNs with clock times if you played with a clock.
 
 <!-- STATS:START -->
-### Last updated: 2026-11-21 14:37 UTC
+### Last updated: 2026-11-22 14:31 UTC
 
 **Dataset:** 2693 rated games, 2023-02-16 to 2026-11-20
 
